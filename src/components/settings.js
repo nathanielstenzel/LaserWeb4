@@ -244,7 +244,7 @@ class Settings extends React.Component {
                                     Do not use 'G0' rapid movement for white (blank) areas when rastering, use 'G1 S0' instead.<br/>This can improve quality for high speed rastering using powerful lasers.
                                     </p>,"Reduce laser on/off cycling") }} />
                         <ToggleField {...{ object: this.props.settings, field: 'machineLaserIntensity', setAttrs: setSettingsAttrs, description: 'Laser Intensity', info: Info(<p className="help-block">
-                                    If your machine does not support laser intensity, you can disable this option. This will prevent any intensity from being output. "G1" instead of "G1 S1" <br/> This can prevent jitter in some machines.
+                                    If your machine does not support laser intensity, you can disable this option. This will prevent any intensity from being output. "G1" instead of "G1 S1" <br/> This can prevent jitter for some machines.
                                     </p>,"Support of laser intensity") }} />
                         <h5 className="header">Probe Tool Offsets</h5>
                         <NumberField {...{ object: this.props.settings, field: 'machineXYProbeOffset', setAttrs: setSettingsAttrs, description: 'X/Y Offset', units: 'mm' , info: Info(<p className="help-block">
