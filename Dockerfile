@@ -35,11 +35,12 @@ RUN npm install -g nodemon && npm -force install && npm install --force lw.comm-
 # ---- Release ----
 # This will use the git head version of lw.comm-server + the LW app version bundled with that.
 #  it DOES NOT build and serve the version of LaserWeb in this repo
+#  this is provided for completeness but is inefficient, lots of unnesscary data and code is bundled but not used
 #
 FROM dependencies AS release
 WORKDIR /usr/src/app
 # define CMD
-CMD [ "npm", "run", "start-server" ]
+CMD [ "node", "node_modules/lw.comm-server/server.js"]
 
 #
 # ---- Dev ----
@@ -50,4 +51,4 @@ RUN npm run bundle-dev
 # Install into lw-comm-server
 RUN rm -rfv node_modules/lw.comm-server/app/* && cp -prv dist/* node_modules/lw.comm-server/app/
 # define CMD
-CMD [ "npm", "run", "start-server" ]
+CMD [ "node", "node_modules/lw.comm-server/server.js"]
