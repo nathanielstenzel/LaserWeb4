@@ -3,44 +3,47 @@
 FROM node:16-bullseye AS base
 # set working directory
 WORKDIR /usr/src/app
-
-# Set up Apt, and install udev
+# Set up Apt, install build tooling and udev
 RUN apt update
 RUN apt install -y build-essential udev
-
-# copy project file
-COPY package*.json ./
+# Upgrade npm and set node options
+RUN npm install -g npm
+RUN npm set progress=false
+# Set the port the container serves on
 EXPOSE 8000
-# copy app sources
-COPY . .
 
 #
-# - Bash (used for debug)
-FROM base AS bash
+# ---- comm-server ----
+FROM base AS comm-server
+# Run npm install and add nodemon + lw comm server from Git
+#  (Currently use --force to allow for broken deps, this should be removed once the dep tree is fixed
+RUN npm install -g nodemon && npm install --force lw.comm-server@git+https://github.com/LaserWeb/lw.comm-server.git
+
+# ---- Release ----
+# This will use the git head version of lw.comm-server + the LW app version bundled with that.
+#  it DOES NOT build and serve the version of LaserWeb in this repo
+#
+FROM comm-server AS release
 WORKDIR /usr/src/app
 # define CMD
-CMD [ "bash" ]
+CMD [ "node", "node_modules/lw.comm-server/server.js"]
 
 #
 # ---- Dependencies ----
 FROM base AS dependencies
 # install node packages
-RUN npm install -g npm
-RUN npm set progress=false
 # Run npm install and add nodemon + lw comm server from Git
 #  (Currently use --force to allow for broken deps, this should be removed once the dep tree is fixed
-RUN npm install -g nodemon && npm -force install && npm install --force lw.comm-server@git+https://github.com/LaserWeb/lw.comm-server.git
+# copy app sources
+COPY . .
+RUN npm -force install && npm install --force lw.comm-server@git+https://github.com/LaserWeb/lw.comm-server.git
 
 #
-# ---- Release ----
-# This will use the git head version of lw.comm-server + the LW app version bundled with that.
-#  it DOES NOT build and serve the version of LaserWeb in this repo
-#  this is provided for completeness but is inefficient, lots of unnesscary data and code is bundled but not used
-#
-FROM dependencies AS release
+# ---- Bash (helpful for debug) ----
+FROM dependencies AS bash
 WORKDIR /usr/src/app
 # define CMD
-CMD [ "node", "node_modules/lw.comm-server/server.js"]
+CMD [ "bash" ]
 
 #
 # ---- Dev ----
