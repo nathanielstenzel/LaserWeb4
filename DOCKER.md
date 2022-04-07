@@ -14,7 +14,7 @@ docker build --target dev -t laserweb4:dev .
 ```
 - run image:
 ```
-docker run -it --device=/dev/ttyUSB0 --rm -p 8000:8000 laserweb4:release
+docker run -it --device=/dev/ttyUSB0 --rm -p 8000:8000 laserweb4:dev
 ```
 - connect to app: http://localhost:8000
 
@@ -33,6 +33,10 @@ docker run -it --device=/dev/ttyUSB0 --rm -p 8000:8000 laserweb4:release
 ```
 - connect to app: http://localhost:8000
 
+## Options
+- Change the `--device=` to point to the correct USB device if necesscary, eg `--device=/dev/ttyACM0` etc.
+- To use a different port change the port mapping in the `docker run` command to `<port number>:8000` and adjust the url you connect to appropriately.
+
 ## Stopping
 Stopping the running container can be tricky, it wont respond to conventional stop commands (ctrl-c, etc.)
 Start a new shell and stop the attached container with `docker stop <uuid>`
@@ -45,3 +49,14 @@ You can use `docker logs -f <uuid>` to follow the output of this.
 ## Clean build
 If you plan to release the docker build it is suggested you clean the dist folder first to avoid bundling obsolete build artifacts:
 `rm dist/* && git checkout dist`
+
+## Allow hot plugging & selection of connected devices
+**This is NOT recommended, since it involves running the container in `--privileged` mode, which is a [potential security risk](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).**
+
+_..you have been warned.._
+
+- run image:
+```
+docker run -it -v /dev:/dev --rm -p 8000:8000 --cap-add=sys_nice --privileged laserweb4:dev (or relese)
+```
+- when you connect the app you should be able to see all USB devices in the selection list
