@@ -80,6 +80,7 @@ export const SETTINGS_INITIALSTATE = {
     machineHeight: 200,
     machineBeamDiameter: 0.2,
     machineBurnWhite: false,
+    machineLaserHasIntensity: true,
     machineBottomLeftX: 0,
     machineBottomLeftY: 0,
 

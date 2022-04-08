@@ -20,6 +20,7 @@ export const OPERATION_INITIALSTATE = {
     laserPower: 100,
     laserPowerMin: 0,
     laserPowerMax: 100,
+    laserPowerCutoff: 0,
     laserDiameter: 0,
     toolDiameter: 0,
     lineDistance: 0,

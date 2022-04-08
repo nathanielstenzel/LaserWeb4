@@ -499,6 +499,7 @@ export const OPERATION_FIELDS = {
     laserPower: { name: 'laserPower', label: 'Laser Power', units: '%', input: NumberInput, ...checkPercent, contextMenu: FieldContextMenu() },
     laserPowerMin: { name: 'laserPowerMin', label: 'Laser Power Min', units: '%', input: NumberInput, ...checkRange(0, 100), contextMenu: FieldContextMenu() },
     laserPowerMax: { name: 'laserPowerMax', label: 'Laser Power Max', units: '%', input: NumberInput, ...checkRange(0, 100), contextMenu: FieldContextMenu() },
+    laserPowerCutoff: { name: 'laserPowerCutoff', label: 'Laser Power Cutoff', units: '%', input: NumberInput, ...checkRange(0, 100), contextMenu: FieldContextMenu() },
     laserDiameter: { name: 'laserDiameter', label: 'Laser Diameter', units: 'mm', input: NumberInput, ...checkPositive, contextMenu: FieldContextMenu() },
     lineDistance: { name: 'lineDistance', label: 'Line Distance', units: 'mm', input: NumberInput, ...checkPositive, contextMenu: FieldContextMenu() },
     lineAngle: { name: 'lineAngle', label: 'Line Angle', units: 'deg', input: NumberInput, contextMenu: FieldContextMenu() },
@@ -585,7 +586,7 @@ export const OPERATION_TYPES = {
     'Laser Fill Path': { allowTabs: false, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'lineDistance', 'lineAngle', 'laserPower', 'margin', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', ...OPERATION_GROUPS.Macros.fields] },
     'Laser Raster': {
         allowTabs: false, tabFields: false, fields: [
-            'name', 'laserPowerMin', 'laserPowerMax', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
+            'name', 'laserPowerMin', 'laserPowerMax', 'laserPowerCutoff', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
             'trimLine', 'joinPixel', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
             ...OPERATION_GROUPS.Filters.fields, ...OPERATION_GROUPS.Macros.fields
         ]
@@ -593,7 +594,7 @@ export const OPERATION_TYPES = {
     'Laser Raster Merge': {
         allowTabs: false, tabFields: false, fields: [
             'name', 'filterFillColor', 'filterStrokeColor',
-            'laserPowerMin', 'laserPowerMax', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
+            'laserPowerMin', 'laserPowerMax', 'laserPowerCutoff', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
             'trimLine', 'joinPixel', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
             ...OPERATION_GROUPS.Filters.fields, ...OPERATION_GROUPS.Macros.fields
         ]
