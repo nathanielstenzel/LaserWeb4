@@ -538,7 +538,6 @@ export const OPERATION_FIELDS = {
     trimLine: { name: 'trimLine', label: 'Trim Pixels', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },                                // lw.raster-to-gcode: Trim trailing white pixels
     joinPixel: { name: 'joinPixel', label: 'Join Pixels', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },  // lw.raster-to-gcode: Join consecutive pixels with same intensity
     burnWhite: { name: 'burnWhite', label: 'Burn White', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },   // lw.raster-to-gcode: [true = G1 S0 | false = G0] on inner white pixels
-    laserIntensityCtl: { name: 'laserIntensityCtl', label: 'Laser Intensity', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },
     verboseGcode: { name: 'verboseGcode', label: 'Verbose GCode', units: '', input: ToggleInput },                      // lw.raster-to-gcode: Output verbose GCode (print each commands)
     vertical: { name: 'vertical', label: 'Vertical', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },       // lw.raster-to-gcode: Go Vertically or reverse diagonally
     diagonal: { name: 'diagonal', label: 'Diagonal', units: '', input: ToggleInput, contextMenu: FieldContextMenu() },       // lw.raster-to-gcode: Go diagonally (increase the distance between points)
@@ -584,11 +583,11 @@ export const OPERATION_TYPES = {
     'Laser Cut': { allowTabs: true, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'laserPower', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', 'segmentLength', ...OPERATION_GROUPS.Macros.fields] },
     'Laser Cut Inside': { allowTabs: true, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'laserDiameter', 'laserPower', 'margin', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', 'segmentLength', ...OPERATION_GROUPS.Macros.fields] },
     'Laser Cut Outside': { allowTabs: true, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'laserDiameter', 'laserPower', 'margin', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', 'segmentLength', ...OPERATION_GROUPS.Macros.fields] },
-    'Laser Fill Path': { allowTabs: false, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'lineDistance', 'lineAngle', 'laserIntensityCtl', 'laserPower', 'margin', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', ...OPERATION_GROUPS.Macros.fields] },
+    'Laser Fill Path': { allowTabs: false, tabFields: false, fields: ['name', 'filterFillColor', 'filterStrokeColor', 'lineDistance', 'lineAngle', 'laserPower', 'margin', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useA', 'aAxisDiameter', 'useBlower', ...OPERATION_GROUPS.Macros.fields] },
     'Laser Raster': {
         allowTabs: false, tabFields: false, fields: [
             'name', 'laserPowerMin', 'laserPowerMax', 'laserPowerCutoff', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
-            'trimLine', 'joinPixel', 'laserIntensityCtl', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
+            'trimLine', 'joinPixel', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
             ...OPERATION_GROUPS.Filters.fields, ...OPERATION_GROUPS.Macros.fields
         ]
     },
@@ -596,7 +595,7 @@ export const OPERATION_TYPES = {
         allowTabs: false, tabFields: false, fields: [
             'name', 'filterFillColor', 'filterStrokeColor',
             'laserPowerMin', 'laserPowerMax', 'laserPowerCutoff', 'laserDiameter', 'passes', 'passDepth', 'startHeight', 'cutRate', 'useBlower',
-            'trimLine', 'joinPixel', 'laserIntensityCtl', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
+            'trimLine', 'joinPixel', 'burnWhite', 'verboseGcode', 'vertical', 'diagonal', 'overScan', 'useA', 'aAxisDiameter',
             ...OPERATION_GROUPS.Filters.fields, ...OPERATION_GROUPS.Macros.fields
         ]
     },

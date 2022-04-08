@@ -33,7 +33,7 @@ import { getGenerator } from "./action2gcode/gcode-generator";
 //      gcodeToolOff:  Laser off (may be empty)
 //      gcodeSMaxValue: Max S value
 export function getLaserCutGcode(props) {
-    let { paths, generator, scale, offsetX, offsetY, decimal, cutFeed, laserPower, laserIntensityCtl, passes,
+    let { paths, generator, scale, offsetX, offsetY, decimal, cutFeed, laserPower, laserHasIntensity, passes,
         useA, aAxisDiameter,
         tabGeometry, gcodeToolOn, gcodeToolOff,
         gcodeLaserIntensity, gcodeLaserIntensitySeparateLine, gcodeSMinValue, gcodeSMaxValue,
@@ -129,11 +129,11 @@ export function getLaserCutGcode(props) {
                 gcode += generator.toolOn(gcodeToolOn, {i:laserOnS});
 
                 for (let i = 1; i < selectedPath.length; ++i) {
-                    if (i == 1 && gcodeLaserIntensitySeparateLine && laserIntensityCtl)
+                    if (i == 1 && gcodeLaserIntensitySeparateLine && laserHasIntensity)
                         gcode += laserOnS + '\n';
                     let action = convertPoint(selectedPath[i], false);
                     //gcode += convertPoint(selectedPath[i], false);
-                    if (i == 1 && !gcodeLaserIntensitySeparateLine && laserIntensityCtl)
+                    if (i == 1 && !gcodeLaserIntensitySeparateLine && laserHasIntensity)
                         action.i = laserOnS;
                         //gcode += ' ' + laserOnS;
                     if (i == 1 && !useA)
@@ -236,7 +236,7 @@ export function getLaserCutGcodeFromOp(settings, opIndex, op, geometry, openGeom
         "\r\n; Paths:        " + camPaths.length +
         "\r\n; Passes:       " + op.passes +
         "\r\n; Cut rate:     " + op.cutRate + ' ' + settings.toolFeedUnits +
-        (op.laserIntensityCtl ? "" : "\r\n; Laser intensity output (S) prevented by settings") +
+        (settings.machineLaserHasIntensity ? "" : "\r\n; Laser intensity output (S) disabled in settings") +
         "\r\n;\r\n";
 
     if (op.hookOperationStart.length) gcode += op.hookOperationStart;
@@ -252,7 +252,7 @@ export function getLaserCutGcodeFromOp(settings, opIndex, op, geometry, openGeom
         decimal: 2,
         cutFeed: op.cutRate * feedScale,
         laserPower: op.laserPower,
-        laserIntensityCtl: op.laserIntensityCtl,
+        laserHasIntensity: settings.machineLaserHasIntensity,
         passes: op.passes,
         useA: op.useA,
         useZ: settings.machineZEnabled ? {

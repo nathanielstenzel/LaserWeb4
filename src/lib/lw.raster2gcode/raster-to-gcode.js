@@ -28,7 +28,7 @@ class RasterToGcode extends CanvasGrid {
             trimLine        : true,           // Trim trailing white pixels
             joinPixel       : true,           // Join consecutive pixels with same intensity
             burnWhite       : true,           // [true = G1 S0 | false = G0] on inner white pixels
-            laserIntensityCtl  : true,
+            laserHasIntensity  : true,
             verboseG        : false,          // Output verbose GCode (print each commands)
             vertical        : false,          // Go vertically / reverse diagonal
             diagonal        : false,          // Go diagonally (increase the distance between points)
@@ -231,7 +231,7 @@ class RasterToGcode extends CanvasGrid {
             )
         }
         else {
-            if (this.laserIntensityCtl) {
+            if (this.laserHasIntensity) {
                 this.gcode.push(
                     '; Beam range : ' + this.beamRange.min + ' to ' + this.beamRange.max,
                     '; Beam power : ' + this.beamPower.min + ' to ' + this.beamPower.max + ' %',
@@ -239,13 +239,13 @@ class RasterToGcode extends CanvasGrid {
                 )
             } else {
                 this.gcode.push(
-                    '; Beam power : no laser intensity - only Laser ON/OFF - (needs to be defined in Settings - Gcode)' 
+                    '; Beam power : no variable intensity; only ON/OFF (Laser intensity output (S) disabled in settings)'
                 )
             }
         }
 
         // Print activated options
-        let options = ['smoothing', 'trimLine', 'joinPixel', 'laserIntensityCtl', 'burnWhite', 'verboseG', 'vertical', 'diagonal']
+        let options = ['smoothing', 'trimLine', 'joinPixel', 'burnWhite', 'verboseG', 'vertical', 'diagonal']
 
         for (var i = options.length - 1; i >= 0; i--) {
             if (! this[options[i]]) {
