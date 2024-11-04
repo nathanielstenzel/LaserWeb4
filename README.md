@@ -15,7 +15,12 @@ cd LaserWeb4/
 npm install -f package.json
 npm run init-dev
 ```
-You should have all of the files imported and all the libraries loaded up if that worked. All you need should be in the dist folder. You can serve up the dist folder or do the following:
+You should have all of the files imported and all the libraries loaded up if that worked. All you need should be in the dist folder. You can serve up the dist folder like in this example
+```sh
+cd dist
+python3 -m http.server 8000
+```
+or have node package manager serve up the project:
 ```sh
 npm run start-dev
 ```
