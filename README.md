@@ -8,6 +8,20 @@ Releases are made available on https://github.com/LaserWeb/LaserWeb4-Binaries/
 ## Documentation
 For more documentation, go to the [Wiki](https://github.com/LaserWeb/LaserWeb4/wiki) or our website https://laserweb.yurl.ch
 
+## Setup a development environment
+First clone the project.
+```sh
+cd LaserWeb4/
+npm install -f package.json
+npm run init-dev
+```
+You should have all of the files imported and all the libraries loaded up if that worked.
+You can serve up the dist folder if you want or run the following to serve it up another way. All you need should be in the dist folder though.
+```sh
+npm run start-dev
+```
+
+
 ## Docker
 
 - run image:
@@ -73,5 +87,4 @@ If you want to contribute, below are long standing community-requested enhanceme
 
 ## How to contribute ?
 
-Details on [https://github.com/LaserWeb/LaserWeb4/wiki/How-to-Contribute](https://github.com/LaserWeb/LaserWeb4/wiki/How-to-Contribute)
-
+To set up a development environment see the Developer HowTo in the repo. Further details are on https://github.com/LaserWeb/LaserWeb4/wiki/How-to-Contribute

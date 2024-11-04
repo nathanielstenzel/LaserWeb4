@@ -4,6 +4,8 @@
   "description": "LaserWeb",
   "main": "./src/index.js",
   "scripts": {
+    "init-dev": "git submodule init && git submodule update && webpack --progress --config webpack.dev.js",
+    "init-prod": "git submodule init && git submodule update && webpack --progress --config webpack.prod.js",
     "start-dev": "webpack serve --progress --open --config webpack.dev.js",
     "start-prod": "webpack serve --progress --open --config webpack.prod.js",
     "bundle-dev": "webpack --progress --config webpack.dev.js",
@@ -111,6 +113,7 @@
     "json-stringify-safe": "^5.0.1",
     "markdown-loader": "^8.0.0",
     "object.omit": "^3.0.0",
+    "package.json": "^2.0.1",
     "prop-types": "^15.8.1",
     "script-loader": "^0.7.2",
     "snapsvg-cjs": "^0.0.6",
