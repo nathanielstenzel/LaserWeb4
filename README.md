@@ -9,7 +9,7 @@ Releases are made available on https://github.com/LaserWeb/LaserWeb4-Binaries/
 For more documentation, go to the [Wiki](https://github.com/LaserWeb/LaserWeb4/wiki) or our website https://laserweb.yurl.ch
 
 ## Setup a development environment
-First clone the project.
+First clone the project and then do the following:
 ```sh
 cd LaserWeb4/
 npm install -f package.json
