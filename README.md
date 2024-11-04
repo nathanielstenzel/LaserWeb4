@@ -24,6 +24,7 @@ or have node package manager serve up the project:
 ```sh
 npm run start-dev
 ```
+The .gitmodules file has references to submodules that are used. Edit it accordingly if you start working on the submodules.
 
 
 ## Docker
